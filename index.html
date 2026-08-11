@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -428,6 +428,47 @@ footer{padding:50px 6vw; text-align:center; border-top:1px solid var(--gold-soft
   .couple-wrap{gap:36px;}
   section{padding:80px 0;}
 }
+
+/* ================= MOBILE: STACKED NAMES + BIGGER FAMILY NAMES ================= */
+@media (max-width:600px){
+  .hero{padding:100px 6vw 50px;}
+
+  .names-row{
+    flex-direction:column;
+    gap:2px;
+    width:100%;
+  }
+  .name{
+    font-size:16vw;
+    line-height:1.05;
+    width:100%;
+  }
+  .amp{
+    font-size:11vw;
+    margin:2px 0;
+  }
+
+  .hero-cer{
+    letter-spacing:.3em;
+    margin-top:22px;
+  }
+
+  .families-wrap{
+    flex-direction:column;
+    gap:26px;
+  }
+  .family-amp{
+    font-size:2.2rem;
+    order:0;
+  }
+  .family-name{
+    font-size:9vw;
+    line-height:1.15;
+  }
+  .family-tag{
+    font-size:.7rem;
+  }
+}
 </style>
 </head>
 <body>
@@ -740,6 +781,7 @@ footer{padding:50px 6vw; text-align:center; border-top:1px solid var(--gold-soft
   const rmsg = document.getElementById('rmsg');
 
   function openModal(mode){
+    if(!overlay) return;
     overlay.classList.add('open');
     formView.style.display = 'block';
     confirmView.classList.remove('show');
@@ -753,25 +795,33 @@ footer{padding:50px 6vw; text-align:center; border-top:1px solid var(--gold-soft
     document.body.style.overflow = 'hidden';
   }
   function closeModal(){
+    if(!overlay) return;
     overlay.classList.remove('open');
     document.body.style.overflow = '';
   }
 
-  document.getElementById('openRsvpYes').addEventListener('click', ()=>openModal('rsvp'));
-  document.getElementById('openRsvpWish').addEventListener('click', ()=>openModal('wish'));
-  document.getElementById('modalClose').addEventListener('click', closeModal);
-  document.getElementById('modalCancel').addEventListener('click', closeModal);
-  document.getElementById('confirmClose').addEventListener('click', closeModal);
-  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
+  const openRsvpYes = document.getElementById('openRsvpYes');
+  const openRsvpWish = document.getElementById('openRsvpWish');
+  if(openRsvpYes) openRsvpYes.addEventListener('click', ()=>openModal('rsvp'));
+  if(openRsvpWish) openRsvpWish.addEventListener('click', ()=>openModal('wish'));
+  const modalClose = document.getElementById('modalClose');
+  const modalCancel = document.getElementById('modalCancel');
+  const confirmClose = document.getElementById('confirmClose');
+  if(modalClose) modalClose.addEventListener('click', closeModal);
+  if(modalCancel) modalCancel.addEventListener('click', closeModal);
+  if(confirmClose) confirmClose.addEventListener('click', closeModal);
+  if(overlay) overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
   document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
 
-  document.getElementById('rsvpForm').addEventListener('submit', (e)=>{
-    e.preventDefault();
-    // No backend: this is not persisted anywhere, just a friendly confirmation.
-    formView.style.display = 'none';
-    confirmView.classList.add('show');
-    e.target.reset();
-  });
+  const rsvpForm = document.getElementById('rsvpForm');
+  if(rsvpForm){
+    rsvpForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      formView.style.display = 'none';
+      confirmView.classList.add('show');
+      e.target.reset();
+    });
+  }
 
   /* ---------- WHATSAPP SHARE / COPY LINK ---------- */
   const whatsappBtn = document.getElementById('whatsappBtn');
@@ -927,4 +977,3 @@ const cursorDot = document.getElementById('cursorDot');
 </script>
 </body>
 </html>
-  
