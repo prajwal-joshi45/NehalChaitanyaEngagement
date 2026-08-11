@@ -267,6 +267,23 @@ section{position:relative; padding:110px 0; z-index:2;}
 /* INVITATION */
 .invitation .lede{margin:0 auto;}
 
+/* COUPLE PORTRAIT */
+.portrait-section{padding-top:70px;}
+.couple-portrait-frame{
+  position:relative; margin:50px auto 0; width:min(360px,78vw);
+}
+.couple-portrait-frame::before{
+  content:''; position:absolute; inset:-14px; border:1px solid var(--gold);
+  pointer-events:none;
+}
+.couple-portrait-frame img{
+  width:100%; height:auto; display:block;
+  box-shadow:0 24px 50px -22px rgba(45,33,29,.4);
+}
+.couple-portrait-caption{
+  margin-top:26px; font-family:var(--script); font-size:1.9rem; color:var(--wine);
+}
+
 /* COUPLE */
 .couple-wrap{display:flex; gap:clamp(24px,6vw,90px); align-items:center; justify-content:center; flex-wrap:wrap; margin-top:50px;}
 .portrait{
@@ -540,6 +557,19 @@ footer{padding:50px 6vw; text-align:center; border-top:1px solid var(--gold-soft
   </div>
 
  
+</section>
+
+<!-- COUPLE PORTRAIT -->
+<section class="portrait-section" id="portrait">
+  <div class="container center">
+    <p class="eyebrow reveal">Just Us</p>
+    <h2 class="section-title reveal">Nehal &amp; Chaitanya</h2>
+    <div class="divider reveal"></div>
+    <div class="couple-portrait-frame reveal-scale">
+      <img src="1.png" alt="Nehal and Chaitanya illustration" loading="lazy">
+    </div>
+    <p class="couple-portrait-caption reveal">Two hearts, one story</p>
+  </div>
 </section>
 
 <!-- INVITATION -->
